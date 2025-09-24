@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
     <script>
-            tailwind.config = {
+        tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -23,38 +23,44 @@
                 }
             }
         }
-
     </script>
     <style>
         .sidebar {
             transition: all 0.3s ease;
         }
+
         .sidebar-collapsed {
-            width: 80px !important; /* force it to override Tailwind's w-64 */
+            width: 80px !important;
+            /* force it to override Tailwind's w-64 */
         }
+
         .sidebar-collapsed .nav-text {
             display: none;
         }
+
         .sidebar-collapsed .logo-text {
             display: none;
         }
+
         .gradient-bg {
             background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
         }
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+
         .sidebar-collapsed .user-info {
-    display: none;
-}
+            display: none;
+        }
 
-.sidebar-collapsed .flex.items-center {
-    justify-content: center;
-}
-
+        .sidebar-collapsed .flex.items-center {
+            justify-content: center;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50 font-sans">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
@@ -62,10 +68,10 @@
             <div class="flex items-center justify-center h-20 px-6 border-b">
                 <div class="flex items-center">
                     <a href="index.php">
-                    <i data-feather="book" class="text-primary w-8 h-8"></i>
+                        <i data-feather="book" class="text-primary w-8 h-8"></i>
                     </a>
                     <a href="index.php">
-                    <span class="logo-text ml-3 text-xl font-semibold text-dark">UniDashboard</span>
+                        <span class="logo-text ml-3 text-xl font-semibold text-dark">UniDashboard</span>
                     </a>
                 </div>
             </div>
@@ -113,7 +119,7 @@
             <div class="px-4 py-6 border-t">
                 <div class="flex items-center">
                     <div class="user-info">
-                         <a href="logout.php" class="flex items-center px-3 py-3 text-gray-600 hover:text-primary rounded-lg mb-2">
+                        <a href="logout.php" class="flex items-center px-3 py-3 text-gray-600 hover:text-primary rounded-lg mb-2">
                             <i data-feather="log-out" class="w-5 h-5"></i>
                             <span class="nav-text ml-3">Logout</span>
                         </a>
@@ -132,15 +138,66 @@
                         <button class="text-gray-500 focus:outline-none" id="menu-toggle">
                             <i data-feather="menu" class="w-6 h-6"></i>
                         </button>
-                        <!-- <h1 class="ml-4 text-xl font-semibold text-dark">Dashboard</h1> -->
+                        <h1 class="ml-4 text-xl font-semibold text-dark">UniDashboard</h1>
                     </div>
-                    <!-- <div class="flex items-center space-x-4">
-                        <button class="text-gray-500 focus:outline-none">
-                            <i data-feather="bell" class="w-6 h-6"></i>
-                        </button>
-                        <button class="text-gray-500 focus:outline-none">
+                    <div class="relative inline-block">
+                        <button id="open-search" class="text-gray-500 focus:outline-none">
                             <i data-feather="search" class="w-6 h-6"></i>
                         </button>
-                    </div> -->
+
+                        <!-- Search Modal -->
+                         <div id="search-modal" class="absolute top-12 right-4 bg-white rounded-lg p-6 w-[400px] shadow-lg z-50 border opacity-0 scale-95 -translate-y-2 pointer-events-none transition-all duration-300 transform">
+                            <form action="search.php" method="get">
+                                <input type="text" name="q" class="w-full px-3 py-2 border rounded mb-4" placeholder="Search the dashboard...">
+                                <div class="flex justify-end">
+                                    <button type="submit" class="bg-sky-500 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Search</button>
+                                    <button type="button" id="close-search" class="ml-2 px-4 py-2 rounded border">Close</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
                 </div>
             </header>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        feather.replace(); // Init icons
+
+        const openBtn = document.getElementById('open-search');
+        const modal = document.getElementById('search-modal');
+        const closeBtn = document.getElementById('close-search');
+
+        // Show modal with animation
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+        });
+
+        // Hide modal with animation
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+            modal.classList.add('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+        });
+
+        // Close modal if clicked outside
+        document.addEventListener('click', function (e) {
+            if (!modal.contains(e.target) && !openBtn.contains(e.target)) {
+                modal.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+                modal.classList.add('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+            }
+        });
+
+        // Sidebar toggle
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-collapsed');
+        });
+
+        // Init AOS animations (optional for other parts of the page)
+        AOS.init();
+    });
+</script>
