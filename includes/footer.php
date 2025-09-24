@@ -53,5 +53,47 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        feather.replace(); // Init icons
+
+        const openBtn = document.getElementById('open-search');
+        const modal = document.getElementById('search-modal');
+        const closeBtn = document.getElementById('close-search');
+
+        // Show modal with animation
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+        });
+
+        // Hide modal with animation
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+            modal.classList.add('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+        });
+
+        // Close modal if clicked outside
+        document.addEventListener('click', function (e) {
+            if (!modal.contains(e.target) && !openBtn.contains(e.target)) {
+                modal.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+                modal.classList.add('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+            }
+        });
+
+        // Sidebar toggle
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-collapsed');
+        });
+
+        // Init AOS animations (optional for other parts of the page)
+        AOS.init();
+    });
+</script>
+
+
 </body>
 </html>
