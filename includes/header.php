@@ -148,7 +148,7 @@
                         <!-- Search Modal -->
                          <div id="search-modal" class="absolute top-12 right-4 bg-white rounded-lg p-6 w-[400px] shadow-lg z-50 border opacity-0 scale-95 -translate-y-2 pointer-events-none transition-all duration-300 transform">
                             <form action="search.php" method="get">
-                                <input type="text" name="q" class="w-full px-3 py-2 border rounded mb-4" placeholder="Search the dashboard...">
+                                <input type="text" name="q" class="w-full px-3 py-2 border rounded mb-4" placeholder="Type something to search...">
                                 <div class="flex justify-end">
                                     <button type="submit" class="bg-sky-500 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Search</button>
                                     <button type="button" id="close-search" class="ml-2 px-4 py-2 rounded border">Close</button>
