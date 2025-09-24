@@ -109,10 +109,10 @@
                             <i data-feather="user" class="w-5 h-5"></i>
                             <span class="nav-text ml-3">Profile</span>
                         </a>
-                        <!-- <a href="settings.php" class="flex items-center px-3 py-3 text-gray-600 hover:text-primary rounded-lg mb-2">
+                        <a href="settings.php" class="flex items-center px-3 py-3 text-gray-600 hover:text-primary rounded-lg mb-2">
                             <i data-feather="settings" class="w-5 h-5"></i>
                             <span class="nav-text ml-3">Settings</span>
-                        </a> -->
+                        </a>
                     </div>
                 </nav>
             </div>
